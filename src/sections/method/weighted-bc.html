@@ -1,0 +1,34 @@
+          <details class="rule-details" id="weighted-bc">
+            <summary>Progress-weighted behavior cloning (Weighted BC)</summary>
+            <div class="details-body policy-setup-body">
+              <p>Within each task and iteration, reward-model comparisons on airplane and red car assembly share data, a parent policy, and the same thresholds and weighting rule (paper, Sec. IV-E.2).</p>
+              <div class="policy-setup-table">
+                <table class="table policy-setup-data" aria-label="Weighted BC training data and evaluation trials for airplane and red car assembly">
+                  <thead><tr><th scope="col">Iteration</th><th scope="col">Training data<small>per task</small></th><th scope="col" class="num">Eval. trials<small>per policy</small></th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Iter1<small>BC parent</small></th><td>20 demonstrations + 12 shared DAgger trajectories</td><td class="num">12</td></tr>
+                    <tr><th scope="row">Iter2<small>Best Iter1 parent</small></th><td>Original 20 demonstrations + 12 new successful rollouts<small>Excludes Iter1 DAgger trajectories.</small></td><td class="num">12</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <details class="method-module-fold" id="weighted-bc-parameters">
+                <summary>Weighting parameters</summary>
+                <p>We use <strong>D100 versions of PRISM and SARM2</strong> (fine-tuned with 100 target-task trajectories).</p>
+                <p>Thresholds are set from average nominal increments in progress curves constructed from human annotations in reward-model evaluation data, then applied to model-predicted increments on unseen policy-learning trajectories. Separate thresholds reflect more diverse initial conditions and motion strategies in human demonstrations than in policy rollouts.</p>
+                <p>For normalized whole-task progress \(\widehat P_t\in[0,1]\), use \(\Delta\widehat P_t=\widehat P_{t+1}-\widehat P_t\).</p>
+                <p class="table-note">Thresholds: [upper, lower], in normalized progress units per action step. The subtask count is \(K=9\) for airplane assembly and \(K=10\) for red car assembly.</p>
+                <div class="policy-setup-table">
+                  <table class="table" aria-label="Weighted BC weighting parameters">
+                    <thead><tr><th scope="col">Setting</th><th scope="col">Value</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">Progress-difference interval</th><td><strong>Adjacent frames at 30 fps (1/30 s).</strong> We assign one imitation weight per action time step.</td></tr>
+                      <tr><th scope="row">Human-action thresholds</th><td>\([0.35,\,-0.13]\times 0.01/K\)</td></tr>
+                      <tr><th scope="row">Policy-action thresholds</th><td>\([0.5,\,-0.2]\times 0.01/K\)</td></tr>
+                      <tr><th scope="row">Imitation weights</th><td><strong>High: 1.0 &middot; Intermediate: 0.5 &middot; Low: 0.</strong> Low actions contribute no imitation loss.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="table-note">The action loss is normalized by total weight (paper, Sec. III-D(b)); normalized progress follows Sec. III-A.</p>
+              </details>
+            </div>
+          </details>

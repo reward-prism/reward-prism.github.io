@@ -1,0 +1,60 @@
+              <section class="method-module target-algorithm" id="target-algorithm" aria-labelledby="supervision-implementation-title">
+                <h4 id="supervision-implementation-title">Construct local progress</h4>
+                <p>The full construction uses the parameters and three steps below to turn sparse annotations into a local progress target.</p>
+                <section id="target-definitions" aria-labelledby="target-definitions-title">
+                  <h5 id="target-definitions-title">Construction parameters</h5>
+                  <dl class="target-parameters" aria-label="Construction parameters">
+                    <div><dt>\(\rho&gt;1\)</dt><dd>Nominal-to-suboptimal slope ratio</dd></div>
+                    <div><dt>\(0&lt;p_{\mathrm{cap}}&lt;1\)</dt><dd>The maximum within-subtask progress we can reach before a regression can happen.</dd></div>
+                    <div><dt>\(T_{\min}&gt;0\)</dt><dd>Fastest measured time to reach \(p_{\mathrm{cap}}\) across diverse trials.</dd></div>
+                  </dl>
+                  <details class="target-parameter-details method-module-fold" id="target-parameter-selection">
+                    <summary>How the example parameters are set</summary>
+                    <p>For screw insertion, we compare successful demonstrations with deliberately induced failures across 20+ diverse trials collected in advance.</p>
+                    <p><strong>\(p_{\mathrm{cap}}\): the latest observed failure point.</strong> Failure can occur while picking up the screw, or much later, just before the screw enters the hole. Comparing these points with successful demonstrations places the latest observed failures that reset progress just below 0.95 local progress. We therefore use \(p_{\mathrm{cap}}=0.95\) for this subtask.</p>
+                    <p><strong>\(T_{\min}\): the fastest measured time to reach that point.</strong> Across the diverse trajectories, the fastest observed time to reach this progress level is approximately 9 s. We use \(T_{\min}=9\,\mathrm{s}\) in this example.</p>
+                  </details>
+                </section>
+                <ol class="target-algorithm-steps" aria-label="Local progress construction">
+                  <li>
+                    <h5>Locate and weight the chunk</h5>
+                    <div>
+                      <p>Locate a chunk between its latest reset, \(\tau_{\mathrm{start}}\), and the next reset, \(\tau_{\mathrm{next}}\). Resets are triggered by subtask boundaries or regressed AQ; nominal/suboptimal changes stay within the same chunk.</p>
+                      <p>Both timestamps use \(t_{\mathrm{subtask}}\), the video time measured in seconds from the subtask's start. The full chunk duration and elapsed time within it are:</p>
+                      <div class="math-block">\[ \begin{aligned} T_{\mathrm{chunk}}&=\tau_{\mathrm{next}}-\tau_{\mathrm{start}},\\ t_{\mathrm{chunk}}&=t_{\mathrm{subtask}}-\tau_{\mathrm{start}}. \end{aligned} \]</div>
+                      <p>Use \(w_i=\rho\) for nominal updates and \(w_i=1\) for suboptimal updates.</p>
+                      <div class="math-block">\[ N_{\mathrm{chunk}}=\sum_{i\in\mathcal C}w_i\,\Delta t_{\mathrm{chunk},i}. \]</div>
+                      <p class="table-note">\(\mathcal C\) contains the current chunk's non-regressed updates. Use \(\Delta t_{\mathrm{chunk},i}=t_{\mathrm{chunk},i}-t_{\mathrm{chunk},i-1}\), with \(t_{\mathrm{chunk},0}=0\) at the reset. \(N_{\mathrm{chunk}}\) is their weighted duration.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <h5>Set the endpoint, then the slope</h5>
+                    <div>
+                      <p>Let \(p_{\mathrm{chunk\_last}}\) be the target progress at the chunk's last non-regressed update. Choose this endpoint according to how the chunk ends:</p>
+                      <div class="target-algorithm-branches">
+                        <div data-supervision-branch="interrupted">
+                          <h6>Case A · Interrupted by regression</h6>
+                          <p>Regressed AQ begins before the subtask boundary. The time available determines the endpoint before the reset:</p>
+                          <div class="math-block">\[ p_{\mathrm{chunk\_last}}=p_{\mathrm{cap}}\min\!\left(1,\frac{T_{\mathrm{chunk}}}{T_{\min}}\right). \]</div>
+                          <p class="table-note">A shorter chunk reaches a proportionally lower endpoint; a chunk lasting at least \(T_{\min}\) reaches \(p_{\mathrm{cap}}\).</p>
+                        </div>
+                        <div data-supervision-branch="boundary">
+                          <h6>Case B · Reaches the subtask boundary</h6>
+                          <p>The chunk reaches the boundary without an intervening regression. Its endpoint is the annotated subtask outcome.</p>
+                          <div class="math-block">\[ p_{\mathrm{chunk\_last}}=\mathrm{subtask\_outcome}. \]</div>
+                        </div>
+                      </div>
+                      <p>For either case, use this endpoint to normalize the weighted updates:</p>
+                      <div class="math-block">\[ \mathrm{slope}_{\mathrm{chunk}}=\frac{p_{\mathrm{chunk\_last}}}{N_{\mathrm{chunk}}}. \]</div>
+                    </div>
+                  </li>
+                  <li class="target-algorithm-accumulate" data-supervision-branch="regressed">
+                    <h5>Accumulate or reset</h5>
+                    <div>
+                      <p>During regression, local progress is held at 0. Otherwise, accumulate from the current chunk's reset:</p>
+                      <div class="math-block">\[ p_{t_{\mathrm{chunk},j}}=\mathrm{slope}_{\mathrm{chunk}}\sum_{i=1}^{j}w_i\,\Delta t_{\mathrm{chunk},i}. \]</div>
+                      <p>At the corresponding global time \(t\), use this local value as \(p_t\) in the <a href="#target-composition">whole-task composition</a> above.</p>
+                    </div>
+                  </li>
+                </ol>
+              </section>

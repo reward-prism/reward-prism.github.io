@@ -1,0 +1,201 @@
+body.table-presentation :is(#predictions, #details) :is(.table-wrap, .policy-setup-table) {
+  margin-block: 24px 0;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #ccd4df;
+  border-radius: 12px;
+  background: #fff;
+  mask-image: none;
+  box-shadow: 0 2px 5px rgb(30 42 61 / 3%);
+}
+body.table-presentation :is(#predictions, #details) .table {
+  margin: 0;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: #293441;
+  font-size: 16px;
+  line-height: 1.6;
+  background: #fff;
+}
+body.table-presentation :is(#predictions, #details) .table :is(th, td) {
+  padding: 17px 20px;
+  vertical-align: middle;
+  border: 0;
+  border-bottom: 1px solid #e0e5ec;
+  color: #34404e;
+}
+body.table-presentation :is(#predictions, #details) .table thead th {
+  padding-block: 14px;
+  background: #edf1f6;
+  border-bottom: 1px solid #c9d2de;
+  color: #39495c;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: normal;
+}
+body.table-presentation :is(#predictions, #details) .table tbody th {
+  font-size: 16px;
+  font-weight: 450;
+  white-space: normal;
+}
+body.table-presentation :is(#predictions, #details) .table tbody:last-of-type > tr:last-child > * {
+  border-bottom: 0;
+}
+body.table-presentation :is(#predictions, #details) .table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+body.table-presentation :is(#predictions, #details) .table tbody .num {
+  border-left: 1px solid #edf0f4;
+  color: #253447;
+  font-size: 18px;
+  font-weight: 500;
+}
+body.table-presentation :is(#predictions, #details) .table tbody .num strong {
+  font-weight: 750;
+}
+body.table-presentation #predictions .table :is(.inference-accuracy-ours, .inference-budget-ours, .prediction-evaluation-ours) > * {
+  background: #f0f5e8;
+  color: #26351e;
+}
+body.table-presentation #predictions .table :is(.inference-accuracy-ours, .inference-budget-ours, .prediction-evaluation-ours) > :first-child {
+  box-shadow: inset 3px 0 #759048;
+  font-weight: 600;
+}
+body.table-presentation #predictions .prediction-evaluation-table .prediction-evaluation-ours > .num {
+  font-weight: 750;
+}
+body.table-presentation #inference-cost .inference-accuracy-group h4 {
+  color: #24303e;
+  font-size: 22px;
+  font-weight: 650;
+}
+body.table-presentation #inference-cost .inference-accuracy-group + .inference-accuracy-group {
+  padding-top: 32px;
+  border-top: 1px solid #e2e6ec;
+}
+body.table-presentation #inference-cost .inference-accuracy-caption {
+  margin-bottom: 28px;
+}
+body.table-presentation #inference-cost .inference-budget {
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+body.table-presentation #inference-cost .inference-budget-table caption {
+  padding: 14px 20px;
+  border-bottom: 1px solid #d8dfe8;
+  background: #f9fafc;
+  color: #516174;
+  font-size: 14px;
+  font-weight: 600;
+}
+body.table-presentation #inference-cost .inference-budget-table tbody + tbody > tr:first-child > * {
+  border-top: 2px solid #cdd5df;
+}
+body.table-presentation #inference-cost .inference-budget-total > * {
+  background: #f7f9fb;
+}
+body.table-presentation #inference-cost .inference-budget-component > th {
+  padding-left: 40px;
+  color: #5b6775;
+}
+body.table-presentation #inference-cost .inference-budget-table td {
+  font-variant-numeric: tabular-nums;
+}
+body.table-presentation #inference-cost .inference-budget-table strong {
+  color: #2c3c50;
+}
+body.table-presentation #inference-cost .inference-budget-table small {
+  color: #637083;
+}
+body.table-presentation #details .table.spec tbody th,
+body.table-presentation #details #weighted-bc-parameters .table tbody th {
+  background: #f0f3f7;
+  color: #39495c;
+  font-size: 15px;
+  font-weight: 600;
+  border-right: 1px solid #dce3ec;
+}
+body.table-presentation #details :is(#offline-rl, #weighted-bc) .policy-setup-data :is(th, td) {
+  padding: 16px 18px;
+}
+body.table-presentation #details :is(#offline-rl, #weighted-bc) .policy-setup-data thead th {
+  background: #edf1f6;
+  font-size: 14px;
+  font-weight: 650;
+}
+body.table-presentation #details :is(#offline-rl, #weighted-bc) .policy-setup-data tbody th {
+  font-weight: 600;
+}
+body.table-presentation #details .table small {
+  color: #5d6b7b;
+}
+
+body.table-presentation #predictions #inference-cost .inference-accuracy-content {
+  gap: 44px;
+}
+body.table-presentation #predictions #inference-cost .inference-accuracy-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  min-width: 0;
+}
+body.table-presentation #predictions #inference-cost .inference-accuracy-group h4 {
+  margin: 0;
+}
+body.table-presentation #predictions #inference-cost .inference-accuracy-group > .table-wrap {
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation {
+  min-width: 0;
+  padding: 20px 24px;
+  color: #4e5967;
+  background: #f6f7f9;
+  border: 1px solid #e8ebef;
+  border-radius: 10px;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation :is(.inference-findings, .inference-finding, .inference-explanation) {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #4e5967;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation .inference-findings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  padding: 0;
+  list-style: none;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation li {
+  min-width: 0;
+  margin: 0;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation li + li {
+  padding-left: 24px;
+  border-left: 1px solid #dce1e8;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation li > strong:first-child {
+  display: block;
+  margin-bottom: 5px;
+  color: #273241;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation #gpt6-reference {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e5eb;
+  font-size: 14px;
+  color: #687381;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation .inference-finding {
+  max-width: 1050px;
+}
+body.table-presentation #predictions #inference-cost .inference-interpretation > :last-child {
+  margin-bottom: 0;
+}

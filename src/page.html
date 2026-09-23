@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Supplementary material for the PRISM ICRA 2027 submission: implementation details, video examples, and additional reward-prediction experiments on three tasks." />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="robots" content="noindex" />
+    <meta property="og:title" content="PRISM — Supplementary Material" />
+    <meta property="og:description" content="Implementation details, video examples, and three additional reward-prediction experiments accompanying the PRISM ICRA 2027 submission." />
+    <meta property="og:type" content="website" />
+    <title>PRISM — Supplementary Material</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/hero.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/method-modules.css" />
+    <link rel="stylesheet" href="assets/css/inference-cost.css" />
+    <link rel="stylesheet" href="assets/css/policy-focus.css" />
+    <link rel="stylesheet" href="assets/css/prediction-player.css" />
+    <link rel="stylesheet" href="assets/css/experiment-layout.css" />
+    <link rel="stylesheet" href="assets/css/method-layout.css" />
+    <link rel="stylesheet" href="assets/css/supervision-example.css" />
+    <link rel="stylesheet" href="assets/css/evaluation-nav.css" />
+    <link rel="stylesheet" href="assets/css/table-presentation.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+    <script defer src="assets/js/data/tasks.js"></script>
+    <script defer src="assets/js/data/predictions.js"></script>
+    <script defer src="assets/js/data/supervision.js"></script>
+    <script defer src="assets/js/app.js"></script>
+    <script defer src="assets/js/evaluation-nav.js"></script>
+    <script defer src="assets/js/policy.js"></script>
+    <script defer src="assets/js/prediction-player.js"></script>
+    <script defer src="assets/js/supervision-example.js"></script>
+  </head>
+  <body class="table-presentation">
+    <a class="skip-link" href="#submission-video">Skip to video</a>
+
+    <svg style="display:none" aria-hidden="true">
+      <symbol id="mark" viewBox="0 0 32 32">
+        <path d="M16 3.5 27.5 30H4.5Z" />
+        <path class="beam" d="M1 16.5H10.4" />
+        <path class="beam beam--in" d="M10.4 16.5 22.4 18.2" />
+        <path class="beam" d="M22.4 18.2l8.6 2.8M22.4 18.2l7.9 4.4M22.4 18.2l6.9 5.8" />
+      </symbol>
+    </svg>
+
+    <header class="topnav">
+      <div class="topnav-inner">
+        <a class="wordmark" href="#top" aria-label="PRISM supplementary material">
+          <svg aria-hidden="true"><use href="#mark" /></svg>
+          <span>Reward Prism</span>
+        </a>
+        <nav aria-label="Sections">
+          <ul class="anchors">
+            <li style="--band: var(--sp-2)"><a href="#top">Video</a></li>
+            <li style="--band: var(--sp-2)"><a href="#composition">Composition</a></li>
+            <li style="--band: var(--sp-1)"><a href="#policy">Policy rollouts</a></li>
+            <li style="--band: var(--sp-5)"><a href="#predictions">Reward evaluation</a></li>
+            <li style="--band: var(--sp-2)"><a href="#details">Details</a></li>
+            <li style="--band: var(--sp-7)"><a href="#tasks">Task examples</a></li>
+            <li style="--band: var(--sp-9)"><a href="#bibtex">BibTeX</a></li>
+          </ul>
+        </nav>
+      </div>
+      <ol class="specbar" aria-hidden="true">
+        <li data-for="top" style="--band: var(--sp-2)"></li>
+        <li data-for="composition" style="--band: var(--sp-2)"></li>
+        <li data-for="policy" style="--band: var(--sp-1)"></li>
+        <li data-for="predictions" style="--band: var(--sp-5)"></li>
+        <li data-for="details" style="--band: var(--sp-2)"></li>
+        <li data-for="tasks" style="--band: var(--sp-7)"></li>
+        <li data-for="bibtex" style="--band: var(--sp-9)"></li>
+      </ol>
+    </header>
+
+    <main>
+      <!-- include: src/sections/hero.html -->
+
+      <!-- include: src/sections/composition-overview.html -->
+
+      <!-- include: src/sections/policy-results.html -->
+
+      <!-- include: src/sections/reward-evaluation.html -->
+
+      <!-- include: src/sections/method-details.html -->
+
+      <!-- include: src/sections/pretraining-tasks.html -->
+
+      <!-- include: src/sections/paper-citation.html -->
+
+    </main>
+
+    <footer>
+      <p><svg class="mark-inline" width="16" height="16" aria-hidden="true" style="vertical-align:-3px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"><use href="#mark" /></svg> PRISM · ICRA 2027 submission · supplementary material</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+.method-module-stack,
+.method-module-grid {
+  display: grid;
+  gap: 32px;
+  min-width: 0;
+}
+.method-module-stack > * + *,
+.method-module-grid > * + * { margin-top: 0; }
+.method-module {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  scroll-margin-top: 100px;
+}
+.method-module + .method-module { padding-top: 28px; border-top: 1px solid var(--line); }
+.method-module h4 {
+  margin: 0 0 16px;
+  font-size: 21px;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+.method-module p,
+.method-module dd { color: var(--text-2); font-size: 18px; line-height: 1.75; }
+.method-module p { margin: 16px 0; }
+.method-module > :last-child { margin-bottom: 0; }
+.method-module .table-wrap { min-width: 0; max-width: 100%; }
+.method-module .spec th[scope="row"],
+.method-module .table th { white-space: normal; text-transform: none; letter-spacing: 0; }
+.method-module .spec th[scope="row"] { width: 25%; min-width: 135px; }
+.method-module .table td { line-height: 1.65; }
+.method-module-fold > summary {
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--text);
+  padding-block: 4px;
+}
+.method-module-fold[open] > summary { margin-bottom: 20px; }
+@media (max-width: 680px) {
+  .method-module-stack,
+  .method-module-grid { gap: 24px; }
+  .method-module + .method-module { padding-top: 24px; }
+  .method-module .table { min-width: 540px; }
+}

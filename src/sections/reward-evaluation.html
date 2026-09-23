@@ -1,0 +1,51 @@
+
+      <section class="block" id="predictions" style="--band: var(--sp-5)">
+        <div class="section-head">
+          <p class="kicker"><i></i> 03 · Reward model evaluation</p>
+          <h2>Unified compositional reward model for long-horizon tasks</h2>
+          <p class="predictor-invariant"><strong>Same everywhere</strong><span>One architecture and one language interface for pretraining, adaptation and inference.</span></p>
+          <p class="lede">Ours reuses the complete pretrained predictor through task and subtask descriptions. Subtask selection and local-progress prediction share the same VLM, with no task-specific classifier replacement or manual vocabulary mapping. Long-task adaptation fine-tunes this same predictor.</p>
+          <p class="table-note">For the shared model and training, see Secs. III-A and III-C of the paper; for experiments on reusing the complete pretrained predictor, see Sec. IV-C.3 and Table IV.</p>
+        </div>
+        <nav class="evaluation-nav" aria-label="Reward model evaluation subsections">
+          <span class="evaluation-nav-label">In this section</span>
+          <a href="#inference-accuracy" aria-current="location">Composition comparisons</a>
+          <a href="#inference-budget-title">Inference cost comparison with frontier VLM</a>
+          <a href="#reward-evaluation">Five-task results</a>
+          <a href="#reward-video-examples">Video examples</a>
+        </nav>
+        <!-- include: src/sections/method/inference-cost.html -->
+        <div class="prediction-evaluation" id="reward-evaluation">
+          <h3>Lowest RMSE on unseen trajectories across five tasks</h3>
+          <p class="paper-guide" id="prediction-evaluation-scope">We extend the paper's airplane and red car evaluation (Sec. IV-C.2, Table III) with three additional reward-prediction tasks: Firetruck assembly, Circuit assembly and switch activation, and Pupgo car assembly.</p>
+          <p class="prediction-evaluation-intro">With <strong>15 adaptation trajectories per task (D15)</strong>, <strong>Ours achieves the lowest RMSE on all five tasks</strong>.</p>
+          <p class="prediction-evaluation-metric" id="prediction-evaluation-metric">RMSE on 24–30 unseen test trajectories per task ↓ <span>In subtask units; lower is better.</span></p>
+          <div class="table-wrap prediction-evaluation-scroll" role="region" aria-label="Five-task reward prediction results" tabindex="0">
+            <table class="table prediction-evaluation-table" aria-labelledby="prediction-evaluation-metric" aria-describedby="prediction-evaluation-scope">
+              <thead>
+                <tr>
+                  <th scope="col">Reward model</th>
+                  <th scope="col" class="num">Pupgo car<br />assembly <span class="prediction-subtask-count">(up to 18 subtasks)</span></th>
+                  <th scope="col" class="num">Firetruck<br />assembly <span class="prediction-subtask-count">(up to 9 subtasks)</span></th>
+                  <th scope="col" class="num">Circuit assembly<br />and switch activation <span class="prediction-subtask-count">(up to 3 subtasks)</span></th>
+                  <th scope="col" class="num">Airplane<br />assembly <span class="prediction-subtask-count">(up to 9 subtasks)</span></th>
+                  <th scope="col" class="num">Red car<br />assembly <span class="prediction-subtask-count">(up to 10 subtasks)</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">GPT6: Composition</th><td class="num">1.8135</td><td class="num">0.2914</td><td class="num">0.2920</td><td class="num">0.4505</td><td class="num">0.5240</td></tr>
+                <tr><th scope="row">SARM (D15)</th><td class="num">0.4042</td><td class="num">0.5406</td><td class="num">0.3612</td><td class="num">0.7474</td><td class="num">1.1240</td></tr>
+                <tr><th scope="row">SARM2 (D15)</th><td class="num">0.3885</td><td class="num">0.5166</td><td class="num">0.2975</td><td class="num">0.4980</td><td class="num">0.6290</td></tr>
+                <tr><th scope="row">RoboMeter (D15)</th><td class="num">0.3189</td><td class="num">0.5202</td><td class="num">0.1864</td><td class="num">0.4930</td><td class="num">0.6580</td></tr>
+                <tr class="prediction-evaluation-ours"><th scope="row">Ours (D15)</th><td class="num"><strong>0.2561</strong></td><td class="num"><strong>0.2264</strong></td><td class="num"><strong>0.1563</strong></td><td class="num"><strong>0.3080</strong></td><td class="num"><strong>0.3940</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="prediction-examples-heading" id="reward-video-examples">
+          <h3>How predictions respond to setbacks</h3>
+          <p>Watch the contact-rich interactions, failures, and retries alongside each model's progress curve.</p>
+        </div>
+        <div id="prediction-player"></div>
+        <p class="prediction-section-note">Progress is shown in accumulated subtask units; pink marks annotated failure, and boundary triangles mark predictions outside the plotted range.</p>
+      </section>

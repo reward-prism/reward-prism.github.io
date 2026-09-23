@@ -1,0 +1,20 @@
+
+          <details class="rule-details" id="offline-rl">
+            <summary>Offline RL</summary>
+            <div class="details-body policy-setup-body">
+              <p>Reward models share BC rollouts and the reward conversion (paper, Sec. III-D(a)).</p>
+              <div class="policy-setup-table">
+                <table class="table policy-setup-data" aria-label="Offline RL training data and evaluation trials">
+                  <thead><tr><th scope="col">Task</th><th scope="col">Training data</th><th scope="col" class="num">Eval. trials<small>per policy</small></th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row"><a href="#policy-star">Star insertion</a></th><td>50 rollouts</td><td class="num">20</td></tr>
+                    <tr><th scope="row"><a href="#policy-tube">Tube transfer</a></th><td>45 rollouts</td><td class="num">12</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <details class="method-module-fold" id="offline-rl-parameters">
+                <summary>Reward parameters</summary>
+                <p>Action-chunk horizon: \(H=20\) steps. Per-step discount factor: \(\gamma=0.997\).</p>
+              </details>
+            </div>
+          </details>

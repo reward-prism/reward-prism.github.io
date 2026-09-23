@@ -1,0 +1,68 @@
+:is(#predictions, #target-construction) .evaluation-nav {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 15;
+  display: flex;
+  align-items: stretch;
+  gap: 28px;
+  min-height: 60px;
+  margin: 0 0 32px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+:is(#predictions, #target-construction) .evaluation-nav-label {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  margin-right: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+:is(#predictions, #target-construction) .evaluation-nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 0 14px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+:is(#predictions, #target-construction) .evaluation-nav a:hover,
+:is(#predictions, #target-construction) .evaluation-nav a[aria-current="location"] {
+  color: var(--violet);
+}
+
+:is(#predictions, #target-construction) .evaluation-nav a[aria-current="location"] {
+  border-bottom-color: var(--violet);
+}
+
+:is(#predictions, #target-construction) .evaluation-nav a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+#target-construction .supervision-nav {
+  margin: 0;
+  background: #f5f6f8;
+}
+
+#predictions #inference-accuracy,
+#predictions #inference-budget-title,
+#predictions #reward-evaluation,
+#predictions #reward-video-examples,
+#target-construction #target-composition,
+#target-construction #target-annotations,
+#target-construction #supervision-example,
+#target-construction #target-algorithm,
+#target-construction #target-definitions {
+  scroll-margin-top: 64px;
+}

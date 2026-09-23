@@ -1,0 +1,12 @@
+                <section class="method-module" id="training-architecture" aria-labelledby="training-architecture-title">
+                  <h4 id="training-architecture-title">Architecture and training</h4>
+                  <p>Training updates the LoRA adapters and progress head (including the temporal transformer) while keeping the base model weights and visual encoder frozen.</p>
+                  <div class="table-wrap"><table class="table spec">
+                    <tbody>
+                      <tr><th scope="row">Backbone</th><td>Qwen3.5-4B vision–language model; base weights and visual encoder frozen</td></tr>
+                      <tr><th scope="row">Trainable</th><td>LoRA adapters (rank 32) in the language decoder · progress head</td></tr>
+                      <tr><th scope="row">Learning rate</th><td>\(2\times10^{-5}\)</td></tr>
+                      <tr><th scope="row">Batch size</th><td>128 (across all methods)</td></tr>
+                    </tbody>
+                  </table></div>
+                </section>

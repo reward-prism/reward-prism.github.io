@@ -1,0 +1,97 @@
+          <section class="inference-context" id="inference-cost" aria-label="Composition accuracy followed by inference cost">
+            <section class="inference-accuracy" id="inference-accuracy" aria-labelledby="composition-evidence-title">
+              <h3 id="composition-evidence-title">Composition is the key!</h3>
+              <p class="inference-explanation">The comparisons below evaluate composition, pretraining, and task-related adaptation for whole-task progress prediction on red car assembly.</p>
+              <p class="inference-accuracy-caption" id="inference-accuracy-caption">Red car model assembly · RMSE in subtask units ↓</p>
+              <div class="inference-accuracy-content">
+                <section class="inference-accuracy-group" aria-labelledby="accuracy-qwen-title">
+                  <h4 id="accuracy-qwen-title">Zero-shot · Qwen3.5-4B</h4>
+                  <div class="table-wrap" role="region" aria-labelledby="accuracy-qwen-title" tabindex="0">
+                    <table class="table inference-accuracy-table" aria-labelledby="accuracy-qwen-title" aria-describedby="accuracy-qwen-findings inference-accuracy-caption inference-accuracy-note">
+                      <thead>
+                        <tr><th scope="col">Model / procedure</th><th scope="col" class="num">Selection<br />acc. ↑</th><th scope="col" class="num">RMSE ↓</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">Base Qwen3.5-4B: direct prediction</th><td class="num">—</td><td class="num">4.541</td></tr>
+                        <tr><th scope="row">Base Qwen3.5-4B: composition (our workflow)</th><td class="num">25.37%</td><td class="num">3.068</td></tr>
+                        <tr class="inference-accuracy-ours"><th scope="row">Ours (pretrained from Qwen3.5-4B; self-selected subtask)</th><td class="num"><strong>69.46%</strong></td><td class="num"><strong>1.380</strong></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="inference-interpretation">
+                    <ul class="inference-findings" id="accuracy-qwen-findings">
+                      <li><strong>Composition improves whole-task progress prediction.</strong> With the same base Qwen3.5-4B model, our compositional workflow lowers RMSE from <strong>4.541 to 3.068</strong>.</li>
+                      <li><strong>Pretraining improves zero-shot transfer to car assembly.</strong> Our pretrained compositional predictor lowers RMSE further, from <strong>3.068 to 1.380</strong>, without task-related adaptation.</li>
+                    </ul>
+                  </div>
+                </section>
+                <section class="inference-accuracy-group" aria-labelledby="accuracy-gpt6-title">
+                  <h4 id="accuracy-gpt6-title">Zero-shot · GPT6</h4>
+                  <div class="table-wrap" role="region" aria-labelledby="accuracy-gpt6-title" tabindex="0">
+                    <table class="table inference-accuracy-table" aria-labelledby="accuracy-gpt6-title" aria-describedby="accuracy-gpt6-findings inference-accuracy-caption inference-accuracy-note">
+                      <thead>
+                        <tr><th scope="col">Model / procedure</th><th scope="col" class="num">Selection<br />acc. ↑</th><th scope="col" class="num">RMSE ↓</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">GPT6: direct prediction</th><td class="num">—</td><td class="num">1.578</td></tr>
+                        <tr><th scope="row">GPT6: composition (our workflow)</th><td class="num"><strong>86.56%</strong></td><td class="num">0.524</td></tr>
+                        <tr class="inference-accuracy-ours"><th scope="row">Ours (pretrained; GPT6-selected subtask)</th><td class="num"><strong>86.56%</strong></td><td class="num"><strong>0.494</strong></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="inference-interpretation">
+                    <p class="inference-explanation" id="gpt6-reference"><strong>GPT6</strong> refers to <strong>GPT6-Astra-high</strong> throughout this website.</p>
+                    <ul class="inference-findings" id="accuracy-gpt6-findings">
+                      <li><strong>Composition also helps a frontier VLM.</strong> GPT6's whole-task RMSE falls from <strong>1.578 to 0.524</strong>, supporting subtask-based composition as a useful formulation for this long-horizon task.</li>
+                      <li><strong>Our pretrained local-progress predictor improves accuracy while reducing API cost.</strong> Keeping GPT6's selected subtask fixed, replacing its progress predictor with ours lowers RMSE from <strong>0.524 to 0.494</strong> and avoids the GPT6 progress API call. The subtask-selection API call remains.</li>
+                    </ul>
+                  </div>
+                </section>
+                <section class="inference-accuracy-group" aria-labelledby="accuracy-adaptation-title">
+                  <h4 id="accuracy-adaptation-title">Task-related adaptation (15 trajectories)</h4>
+                  <div class="table-wrap" role="region" aria-labelledby="accuracy-adaptation-title" tabindex="0">
+                    <table class="table inference-accuracy-table" aria-labelledby="accuracy-adaptation-title" aria-describedby="accuracy-adaptation-findings inference-accuracy-caption inference-accuracy-note">
+                      <thead>
+                        <tr><th scope="col">Model / procedure</th><th scope="col" class="num">Selection<br />acc. ↑</th><th scope="col" class="num">RMSE ↓</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">GPT6: composition (zero-shot reference)</th><td class="num">86.56%</td><td class="num">0.524</td></tr>
+                        <tr><th scope="row">Ours, no pretraining + adaptation</th><td class="num">93.33%</td><td class="num">0.502</td></tr>
+                        <tr class="inference-accuracy-ours"><th scope="row">Ours, pretrained + adaptation</th><td class="num"><strong>94.70%</strong></td><td class="num"><strong>0.394</strong></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="inference-interpretation">
+                    <p class="inference-finding" id="accuracy-adaptation-findings"><strong>With 15 adaptation trajectories, our pretrained Qwen3.5-4B model outperforms zero-shot GPT6 composition on car assembly.</strong> Whole-task RMSE is <strong>0.394 versus 0.524</strong>, and subtask-selection accuracy is <strong>94.70% versus 86.56%</strong>.</p>
+                  </div>
+                </section>
+              </div>
+              <p class="table-note" id="inference-accuracy-note">For the composition, pretraining, and adaptation comparisons, see Sec. IV-D.1–2 and Table VIII of the paper. GPT6-selected results combine API subtask selection with local progress prediction.</p>
+            </section>
+              <section class="inference-budget" aria-labelledby="inference-budget-title">
+                <h3 id="inference-budget-title">GPT6 composition comes at a high cost</h3>
+                <p class="inference-explanation">In the reported setup, composition costs <strong>≈ US$38.08 per trajectory</strong> and takes <strong>41.55 s per query</strong>.</p>
+                <p class="inference-explanation">Ours takes <strong>469.4 ms per query</strong> on an NVIDIA H100, with no API fee.</p>
+                <p class="table-note" id="inference-budget-note">Reported latencies were measured over <strong>8,000 calls</strong>. For both Ours and GPT6 composition, the per-query latency sums subtask selection and within-stage progress. API costs use 1 fps on trajectories averaging 340 s in the reported experiment; local GPU costs are not priced.</p>
+                <div class="table-wrap" role="region" aria-label="Reported latency and cost" tabindex="0">
+                <table class="table inference-budget-table" aria-describedby="inference-budget-note">
+                  <caption>Reported inference setup</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Scoring procedure</th>
+                      <th scope="col">Latency <small>per query</small></th>
+                      <th scope="col">API cost <small>US$ / trajectory</small></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="inference-budget-ours"><th scope="row">Ours <small>NVIDIA H100</small></th><td><small>2 × 234.7 ms =</small><strong>469.4</strong> <span class="inference-unit">ms</span></td><td>No API fee</td></tr>
+                  </tbody>
+                  <tbody aria-labelledby="inference-gpt6-total">
+                    <tr class="inference-budget-total"><th scope="row" id="inference-gpt6-total">GPT6 composition <small>Total</small></th><td><small>29.00 + 12.55 =</small><strong>41.55</strong> <span class="inference-unit">s</span></td><td><strong>≈ $38.08/traj</strong></td></tr>
+                    <tr class="inference-budget-component"><th scope="row">Subtask selection</th><td><strong>29.00</strong> <span class="inference-unit">s</span></td><td><strong>≈ $20.31/traj</strong></td></tr>
+                    <tr class="inference-budget-component"><th scope="row">Within-stage progress</th><td><strong>12.55</strong> <span class="inference-unit">s</span></td><td><strong>≈ $17.77/traj</strong></td></tr>
+                  </tbody>
+                </table>
+                </div>
+              </section>
+          </section>

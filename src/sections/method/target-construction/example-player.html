@@ -1,0 +1,53 @@
+              <section class="method-module" id="supervision-example" aria-labelledby="supervision-title">
+                <header class="supervision-heading">
+                  <h4 id="supervision-title">Reset local progress. Preserve completed work.</h4>
+                  <p>In this constructed target, failure resets insertion progress to 0 and whole-task progress to 6/9. The six completed subtasks retain their credit throughout failure and recovery.</p>
+                  <p>Each attempt here is a chunk of duration \(T_{\mathrm{chunk}}\): the first ends in regression (Case A), and the recovery reaches the subtask boundary (Case B).</p>
+                  <p class="supervision-context">Airplane assembly · Insert the screw · Subtask 7 of 9</p>
+                </header>
+                <div class="supervision-media">
+                  <video id="supervision-video" src="assets/video/supervision/screw-insertion/cameras.mp4" poster="assets/video/supervision/screw-insertion/cameras.jpg" width="1280" height="960" muted playsinline preload="metadata" aria-label="Four synchronized camera views of screw insertion, failure and recovery"></video>
+                  <div class="supervision-plot">
+                    <div class="supervision-legend" aria-label="Curve legend">
+                      <span><i class="supervision-swatch supervision-swatch--ours"></i>Subtask + AQ (ours)</span>
+                      <span><i class="supervision-swatch supervision-swatch--credit"></i>Completed credit</span>
+                      <span><i class="supervision-swatch supervision-swatch--failure"></i>Regressed</span>
+                    </div>
+                    <div data-supervision-chart></div>
+                    <div class="supervision-target-link" role="group" aria-label="Current local and whole-task progress">
+                      <span>Local <i>p</i> <strong data-supervision-local-value>= 0</strong></span>
+                      <span aria-hidden="true">→</span>
+                      <span>Whole-task <i>P</i> <strong data-supervision-whole-value>= 6/9</strong></span>
+                    </div>
+                  </div>
+                  <div class="supervision-segments" role="group" aria-label="Select an annotated segment">
+                    <button type="button" class="supervision-segment" data-supervision-segment="attempt" aria-pressed="true">
+                      <span class="supervision-segment-label">1 · Before failure</span>
+                      <strong>Case A · Interrupted by regression</strong>
+                      <span class="supervision-segment-window" data-supervision-window="attempt"></span>
+                      <span class="supervision-segment-value"><i>T</i><sub>chunk</sub> = <span data-supervision-duration="attempt"></span> s</span>
+                    </button>
+                    <button type="button" class="supervision-segment" data-supervision-segment="failure" aria-pressed="false">
+                      <span class="supervision-segment-label">2 · Regression</span>
+                      <strong>Reset local progress</strong>
+                      <span class="supervision-segment-value">\(p=0\)</span>
+                      <span class="supervision-segment-window">Completed credit stays at <span data-supervision-credit></span></span>
+                    </button>
+                    <button type="button" class="supervision-segment" data-supervision-segment="recovery" aria-pressed="false">
+                      <span class="supervision-segment-label">3 · Recovery</span>
+                      <strong>Case B · Reaches the subtask boundary</strong>
+                      <span class="supervision-segment-window" data-supervision-window="recovery"></span>
+                      <span class="supervision-segment-value"><i>T</i><sub>chunk</sub> = <span data-supervision-duration="recovery"></span> s</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="supervision-transport">
+                  <button class="btn btn--primary" type="button" data-supervision-play>Play</button>
+                  <button class="btn" type="button" data-supervision-replay>Replay</button>
+                  <input type="range" min="0" max="1116" step="1" value="0" data-supervision-seek aria-label="Elapsed time within the screw insertion subtask" />
+                  <output data-supervision-time>0:00.0 / 0:37.2</output>
+                  <span class="supervision-speed" aria-label="Playback speed fixed at 4 times">4× playback</span>
+                </div>
+                <p class="supervision-state" data-supervision-status role="status">Nominal execution · Six completed subtasks retain their credit.</p>
+                <p class="supervision-error" data-supervision-error role="status" hidden></p>
+              </section>

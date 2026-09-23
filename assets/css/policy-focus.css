@@ -1,0 +1,27 @@
+#policy .section-head { margin-bottom: var(--s7); }
+#policy .section-head h2 { max-width: none; }
+.policy-task-identity { position: relative; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px var(--s5); }
+.policy-task-anchor { position: absolute; top: 0; left: 0; width: 1px; height: 1px; scroll-margin-top: 20px; }
+.policy-task-identity h3 { margin: 0; font-size: clamp(24px, 3vw, 30px); }
+.policy-task-meta { margin: 0; color: var(--muted); font-size: 16px; font-variant-numeric: tabular-nums; }
+.policy-task-picker { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.policy-task-tab {
+  display: flex; align-items: center; justify-content: center;
+  min-width: 0; min-height: 56px; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--r-s);
+  background: var(--bg); color: var(--text-2); text-align: center; font: inherit; cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.policy-task-tab:hover { border-color: var(--violet); background: var(--surface); }
+.policy-task-tab:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+.policy-task-tab[aria-selected="true"] { border-color: var(--violet); background: color-mix(in srgb, var(--violet) 7%, var(--bg)); color: var(--violet); }
+.policy-task-name { font-size: 16px; font-weight: 600; line-height: 1.45; }
+.policy-task-count { display: inline-block; margin-left: 10px; color: var(--muted); font-size: 16px; font-weight: 400; letter-spacing: 0; }
+.policy-task-name .policy-task-count { display: block; margin: 3px 0 0; font-size: 14px; }
+.policy-task-context { display: grid; gap: var(--s3); margin-top: var(--s3); }
+.policy-task-context p { margin: 0; max-width: none; color: var(--text-2); font-size: 18px; line-height: 1.7; }
+.policy-task-context .policy-task-overview { font-weight: 600; }
+@media (max-width: 600px) {
+  .policy-task-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .policy-task-tab { padding: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .policy-task-tab { transition: none; } }
